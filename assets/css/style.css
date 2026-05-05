@@ -463,10 +463,41 @@ body[data-bs-theme='dark'] .sidebar {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(148, 163, 184, .18) !important;
 }
+[data-bs-theme='dark'] .app-topbar,
+body[data-bs-theme='dark'] .app-topbar {
+    background: rgba(15, 23, 42, 0.88);
+    border-color: rgba(71, 85, 105, 0.4) !important;
+}
+[data-bs-theme='dark'] .app-topbar h1,
+body[data-bs-theme='dark'] .app-topbar h1 {
+    color: #f8fafc !important;
+}
 .top-search { max-width: 340px; }
 .top-search .input-group-text,
 .top-search .form-control {
     border-color: #dbe6f5;
+}
+[data-bs-theme='dark'] .top-search .input-group-text,
+body[data-bs-theme='dark'] .top-search .input-group-text,
+[data-bs-theme='dark'] .top-search .form-control,
+body[data-bs-theme='dark'] .top-search .form-control {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+[data-bs-theme='dark'] .top-icon-btn,
+body[data-bs-theme='dark'] .top-icon-btn,
+[data-bs-theme='dark'] .profile-btn,
+body[data-bs-theme='dark'] .profile-btn {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+[data-bs-theme='dark'] .top-icon-btn:hover,
+body[data-bs-theme='dark'] .top-icon-btn:hover,
+[data-bs-theme='dark'] .profile-btn:hover,
+body[data-bs-theme='dark'] .profile-btn:hover {
+    background-color: #334155 !important;
 }
 .top-icon-btn,
 .profile-btn,
