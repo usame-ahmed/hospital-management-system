@@ -44,6 +44,9 @@ $flashMessages = get_flash();
                         <i class="fa-regular fa-bell"></i>
                         <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
                     </button>
+                    <button class="btn btn-light top-icon-btn" id="themeToggle" type="button" aria-label="Toggle Dark Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle profile-btn" data-bs-toggle="dropdown" type="button">
                             <i class="fa-regular fa-circle-user me-1"></i><?= e($user['full_name'] ?? 'Guest') ?>

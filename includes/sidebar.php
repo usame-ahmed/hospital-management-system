@@ -83,10 +83,6 @@ $links = [
                 </a>
             <?php endforeach; ?>
         </nav>
-        <div class="sidebar-footer px-3 pb-4 pt-2 mt-auto">
-            <button class="btn btn-sidebar-theme w-100" id="themeToggle" type="button">
-                <i class="fa-solid fa-moon me-2" aria-hidden="true"></i><span class="sidebar-theme-label">Toggle Dark Mode</span>
-            </button>
-        </div>
+
     </div>
 </aside>
