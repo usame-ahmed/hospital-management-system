@@ -225,11 +225,11 @@ body[data-bs-theme='dark'] .sidebar {
     flex-shrink: 0;
 }
 .sidebar-brand .brand-icon-wordmark {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    font-size: 1.15rem;
-    box-shadow: 0 6px 14px rgba(var(--sidebar-accent-rgb), 0.14);
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 10px rgba(var(--sidebar-accent-rgb), 0.12);
 }
 [data-bs-theme='dark'] .brand-icon {
     background: linear-gradient(135deg, rgba(45, 212, 191, 0.22), rgba(56, 189, 248, 0.14));

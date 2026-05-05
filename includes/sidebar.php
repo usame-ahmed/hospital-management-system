@@ -69,13 +69,13 @@ $links = [
         <button type="button" class="btn-close position-absolute top-50 end-0 translate-middle-y me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column p-0 sidebar-body">
-        <div class="sidebar-brand d-none d-lg-flex flex-row align-items-center px-3 pt-3 pb-3 gap-3" aria-label="<?= e(APP_NAME) ?>">
+        <div class="sidebar-brand d-none d-lg-flex flex-row align-items-center px-3 pt-4 pb-2 gap-2" aria-label="<?= e(APP_NAME) ?>">
             <span class="brand-icon brand-icon-wordmark" aria-hidden="true"><i class="fa-solid fa-hospital"></i></span>
             <div class="sidebar-brand-text text-start">
-                <div class="sidebar-brand-wordmark fw-bold fs-6 lh-sm text-truncate">
-                    <?= e(APP_NAME) ?>
+                <div class="sidebar-brand-wordmark fw-bold text-truncate" style="font-size: 0.95rem; letter-spacing: 0.5px;">
+                    <?= e($appTitleInitials) ?>
                 </div>
-                <span class="sidebar-brand-meta small text-muted d-block mt-1 mb-0" style="font-size: 0.72rem;">Medical Dashboard</span>
+                <span class="sidebar-brand-meta text-muted d-block" style="font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px;">SaaS Platform</span>
             </div>
         </div>
         <nav class="sidebar-nav-scroll nav nav-pills flex-column gap-1 px-3 flex-grow-1" aria-label="Main navigation">
