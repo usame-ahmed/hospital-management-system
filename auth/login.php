@@ -102,20 +102,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 1.25rem;
             position: relative;
         }
-        .form-control {
+        .form-floating > .form-control {
             border-radius: 12px;
-            padding-left: 2.8rem;
+            padding-left: 2.8rem !important;
             border: 1.5px solid #e2e8f0;
             height: 3.2rem;
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
-        .form-control:focus {
+        .form-floating > .form-control:focus {
             border-color: #13c0b6;
             box-shadow: 0 0 0 0.25rem rgba(19, 192, 182, 0.15);
         }
-        .form-floating label {
-            padding-left: 2.8rem;
+        .form-floating > label {
+            padding-left: 2.8rem !important;
             color: #95a5a6;
         }
         .field-icon {
