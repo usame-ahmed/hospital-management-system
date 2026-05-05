@@ -37,105 +37,193 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | <?= APP_NAME ?></title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Login | Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #13c0b6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem;
+        }
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72, #13c0b6);
+        }
+        .medical-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .medical-icon-wrapper i {
+            font-size: 2rem;
+            color: #00838f;
+        }
+        .login-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+        }
+        .login-subtitle {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+        .form-floating {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+        .form-control {
+            border-radius: 12px;
+            padding-left: 2.8rem;
+            border: 1.5px solid #e2e8f0;
+            height: 3.2rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #13c0b6;
+            box-shadow: 0 0 0 0.25rem rgba(19, 192, 182, 0.15);
+        }
+        .form-floating label {
+            padding-left: 2.8rem;
+            color: #95a5a6;
+        }
+        .field-icon {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: #00838f;
+            z-index: 5;
+            font-size: 1.1rem;
+        }
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            cursor: pointer;
+            z-index: 5;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .toggle-password:hover {
+            color: #2c3e50;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #1e3c72, #13c0b6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(19, 192, 182, 0.3);
+            color: white;
+        }
+        .alert {
+            font-size: 0.9rem;
+            border-radius: 10px;
+            padding: 0.75rem;
+            text-align: left;
+        }
+    </style>
 </head>
-<body class="auth-body auth-body-login">
-<main class="login-shell login-shell-vertical">
-    <section class="login-mini-brand text-center mb-2">
-        <div class="login-logo mx-auto mb-2">
-            <i class="fa-solid fa-hospital"></i>
+<body>
+
+<div class="login-card">
+    <div class="medical-icon-wrapper">
+        <i class="fa-solid fa-hospital-user"></i>
+    </div>
+    <h1 class="login-title">Hospital Management System</h1>
+    <p class="login-subtitle">Welcome back! Please login to continue.</p>
+
+    <?php if ($error): ?>
+        <div class="alert alert-danger" role="alert">
+            <i class="fa-solid fa-circle-exclamation me-2"></i><?= htmlspecialchars($error) ?>
         </div>
-        <h1 class="h6 mb-0 fw-bold"><?= e(APP_NAME) ?></h1>
-    </section>
+    <?php endif; ?>
 
-    <section class="login-panel login-panel-vertical">
-        <div class="login-card login-card-minimal">
-            <div class="text-center mb-3">
-                <p class="small text-muted mb-0">Sign in to continue</p>
-            </div>
-
-            <?php if ($error): ?>
-                <div class="alert alert-danger border-0 shadow-sm py-2 d-flex align-items-start gap-2" role="alert">
-                    <i class="fa-solid fa-triangle-exclamation mt-1"></i>
-                    <div><?= e($error) ?></div>
-                </div>
-            <?php endif; ?>
-
-            <form method="post" id="loginForm" class="mt-3" autocomplete="on">
-                <div class="login-float-wrap mb-3">
-                    <i class="fa-regular fa-user login-field-icon" aria-hidden="true"></i>
-                    <div class="form-floating">
-                        <input class="form-control login-field-control" id="loginUsername" type="text" name="username" required autofocus placeholder="Username or email">
-                        <label for="loginUsername">Username / Email</label>
-                    </div>
-                </div>
-
-                <div class="login-float-wrap login-float-password mb-2">
-                    <i class="fa-solid fa-key login-field-icon" aria-hidden="true"></i>
-                    <div class="form-floating">
-                        <input class="form-control login-field-control pe-5" id="loginPassword" type="password" name="password" required placeholder="Password">
-                        <label for="loginPassword">Password</label>
-                    </div>
-                    <button class="btn btn-link login-pass-toggle" type="button" id="togglePassword" aria-label="Show password">
-                        <i class="fa-regular fa-eye"></i>
-                    </button>
-                </div>
-
-                <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="rememberMe">
-                        <label class="form-check-label text-muted" for="rememberMe">Remember me</label>
-                    </div>
-                    <a class="small text-decoration-none login-forgot" href="#" role="button">Forgot password?</a>
-                </div>
-
-                <button class="btn btn-primary btn-lg w-100 login-submit" type="submit" id="loginSubmit">
-                    <span class="login-submit-label"><i class="fa-solid fa-right-to-bracket me-2"></i>Login</span>
-                    <span class="login-submit-spinner spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
-                </button>
-
-                <div class="login-trust-strip mt-3">
-                    <div><i class="fa-solid fa-shield-check me-1"></i> Secure login</div>
-                    <div><i class="fa-solid fa-lock me-1"></i> Encrypted system access</div>
-                </div>
-            </form>
+    <form method="post" id="loginForm">
+        <div class="form-floating">
+            <i class="fa-solid fa-user field-icon"></i>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email" required autofocus>
+            <label for="username">Username / Email</label>
         </div>
-    </section>
-</main>
+        
+        <div class="form-floating position-relative">
+            <i class="fa-solid fa-lock field-icon"></i>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <button type="button" class="toggle-password" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                <i class="fa-solid fa-eye" id="togglePasswordIcon"></i>
+            </button>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <button type="submit" class="btn btn-login">
+            <i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Login
+        </button>
+    </form>
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const pass = document.getElementById('loginPassword');
-    const toggle = document.getElementById('togglePassword');
-    const form = document.getElementById('loginForm');
-    const submit = document.getElementById('loginSubmit');
-    const spinner = document.querySelector('.login-submit-spinner');
-    const label = document.querySelector('.login-submit-label');
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePasswordBtn');
+        const toggleIcon = document.getElementById('togglePasswordIcon');
 
-    if (toggle && pass) {
-        toggle.addEventListener('click', () => {
-            const isHidden = pass.getAttribute('type') === 'password';
-            pass.setAttribute('type', isHidden ? 'text' : 'password');
-            toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
-            toggle.innerHTML = isHidden ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+        toggleBtn.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
         });
-    }
-
-    if (form && submit && spinner && label) {
-        form.addEventListener('submit', () => {
-            submit.disabled = true;
-            spinner.classList.remove('d-none');
-            label.classList.add('opacity-75');
-        });
-    }
-});
+    });
 </script>
+
 </body>
 </html>
