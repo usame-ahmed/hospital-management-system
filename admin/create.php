@@ -10,12 +10,13 @@ if (!in_array($selectedRole, $allowedRoles, true)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, role, full_name, is_active) VALUES (?, ?, ?, ?, 1)");
+    $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, role, full_name, gender, is_active) VALUES (?, ?, ?, ?, ?, 1)");
     $stmt->execute([
         trim($_POST['username']),
         password_hash($_POST['password'], PASSWORD_DEFAULT),
         $_POST['role'],
         trim($_POST['full_name']),
+        $_POST['gender'] ?? 'Male',
     ]);
     flash('success', 'User created.');
     redirect('/admin/users.php');
@@ -27,6 +28,10 @@ include __DIR__ . '/../includes/header.php';
     <input name="full_name" placeholder="Full name" required>
     <input name="username" placeholder="Username" required>
     <input type="password" name="password" placeholder="Password" required>
+    <select name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
     <select name="role" required>
         <option value="admin" <?= $selectedRole === 'admin' ? 'selected' : '' ?>>Admin</option>
         <option value="receptionist" <?= $selectedRole === 'receptionist' ? 'selected' : '' ?>>Receptionist</option>

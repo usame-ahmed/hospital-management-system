@@ -18,6 +18,40 @@ body {
     color: #212529;
     transition: background-color .25s ease, color .25s ease;
 }
+
+/* Role-based Dashboard Backgrounds */
+body.role-doctor.gender-Male { background: url('../img/doctor-Male.jpg') center/cover no-repeat fixed; }
+body.role-doctor.gender-Female { background: url('../img/doctor-Female.jpg') center/cover no-repeat fixed; }
+body.role-pharmacist.gender-Male { background: url('../img/pharmacist-Male.jpg') center/cover no-repeat fixed; }
+body.role-pharmacist.gender-Female { background: url('../img/pharmacist-Female.jpg') center/cover no-repeat fixed; }
+body.role-lab_technician.gender-Male { background: url('../img/lab_technician-Male.jpg') center/cover no-repeat fixed; }
+body.role-lab_technician.gender-Female { background: url('../img/lab_technician-Female.jpg') center/cover no-repeat fixed; }
+body.role-receptionist.gender-Male { background: url('../img/receptionist-Male.jpg') center/cover no-repeat fixed; }
+body.role-receptionist.gender-Female { background: url('../img/receptionist-Female.jpg') center/cover no-repeat fixed; }
+
+/* Dashboard Overlays for specific roles */
+.dashboard-bg-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: background-color 0.4s ease;
+}
+body.role-doctor .dashboard-bg-overlay {
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.82) 0%, rgba(10, 88, 202, 0.88) 100%);
+}
+body.role-pharmacist .dashboard-bg-overlay {
+    background: linear-gradient(135deg, rgba(25, 135, 84, 0.82) 0%, rgba(20, 108, 67, 0.88) 100%);
+}
+body.role-lab_technician .dashboard-bg-overlay {
+    background: linear-gradient(135deg, rgba(111, 66, 193, 0.82) 0%, rgba(89, 53, 154, 0.88) 100%);
+}
+body.role-receptionist .dashboard-bg-overlay {
+    background: linear-gradient(135deg, rgba(32, 201, 151, 0.82) 0%, rgba(26, 161, 121, 0.88) 100%);
+}
+body[data-bs-theme='dark'] .dashboard-bg-overlay {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(15, 23, 42, 0.96) 100%) !important;
+}
 .app-layout {
     min-height: 100vh;
 }

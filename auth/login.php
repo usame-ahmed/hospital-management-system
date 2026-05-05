@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    $stmt = $pdo->prepare('SELECT id, username, password_hash, role, full_name FROM users WHERE username = ? AND is_active = 1 LIMIT 1');
+    $stmt = $pdo->prepare('SELECT id, username, password_hash, role, full_name, gender FROM users WHERE username = ? AND is_active = 1 LIMIT 1');
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 

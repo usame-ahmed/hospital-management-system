@@ -9,13 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $pdo->beginTransaction();
             $insert = $pdo->prepare(
-                "INSERT INTO users (username, password_hash, role, full_name, is_active)
-                 VALUES (?, ?, 'doctor', ?, ?)"
+                "INSERT INTO users (username, password_hash, role, full_name, gender, is_active)
+                 VALUES (?, ?, 'doctor', ?, ?, ?)"
             );
             $insert->execute([
                 trim($_POST['username'] ?? ''),
                 password_hash($_POST['password'] ?? '', PASSWORD_DEFAULT),
                 trim($_POST['full_name'] ?? ''),
+                $_POST['gender'] ?? 'Male',
                 isset($_POST['is_active']) ? 1 : 0,
             ]);
             $userId = $pdo->lastInsertId();
@@ -159,6 +160,13 @@ include __DIR__ . '/../includes/header.php';
                     <div class="mb-2">
                         <label class="form-label">Full Name</label>
                         <input class="form-control" name="full_name" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" name="gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Department / Specialization</label>

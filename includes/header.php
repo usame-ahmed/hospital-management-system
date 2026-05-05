@@ -4,6 +4,8 @@ require_once __DIR__ . '/auth.php';
 $user = current_user();
 $pageTitle = $pageTitle ?? APP_NAME;
 $flashMessages = get_flash();
+$userRole = $user['role'] ?? 'guest';
+$userGender = $user['gender'] ?? 'Male';
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,7 +20,8 @@ $flashMessages = get_flash();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
-<body data-bs-theme="light">
+<body data-bs-theme="light" class="role-<?= e($userRole) ?> gender-<?= e($userGender) ?>">
+<div class="dashboard-bg-overlay"></div>
 <div class="app-layout app-layout-dashboard" id="appShell">
     <?php include __DIR__ . '/sidebar.php'; ?>
     <main class="main-content flex-grow-1">
