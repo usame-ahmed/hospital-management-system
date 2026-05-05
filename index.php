@@ -21,7 +21,7 @@ $primaryIcon = $isLoggedIn ? 'fa-solid fa-gauge-high' : 'fa-solid fa-right-to-br
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         body { font-family: 'Poppins', sans-serif; background: #f7faff; }
-        .hero { padding: 90px 0 70px; background: linear-gradient(130deg, #0d6efd 0%, #0b5ed7 50%, #13c0b6 100%); color: #fff; }
+        .hero { padding: 120px 0 100px; background: linear-gradient(130deg, rgba(13, 110, 253, 0.85) 0%, rgba(11, 94, 215, 0.85) 50%, rgba(19, 192, 182, 0.85) 100%), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat; color: #fff; }
         .hero-card, .feature-card { border: 0; border-radius: 16px; box-shadow: 0 12px 28px rgba(15,23,42,.12); }
         .feature-card { transition: .2s ease; }
         .feature-card:hover { transform: translateY(-3px); }
