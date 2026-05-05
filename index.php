@@ -27,6 +27,17 @@ $primaryIcon = $isLoggedIn ? 'fa-solid fa-gauge-high' : 'fa-solid fa-right-to-br
         .feature-card:hover { transform: translateY(-3px); }
         .section-title { font-weight: 700; margin-bottom: 1rem; color: #0f172a; }
         footer { background: #0f172a; color: #cbd5e1; }
+        /* Carousel Styles */
+        .department-carousel { margin-bottom: 0; background: #0f172a; }
+        .carousel-item { height: 75vh; min-height: 480px; max-height: 720px; position: relative; }
+        .carousel-image { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .carousel-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.4) 55%, transparent 100%); }
+        .carousel-caption { bottom: auto; top: 50%; transform: translateY(-50%); text-align: left; left: 8%; right: 15%; padding: 0; z-index: 10; }
+        .carousel-caption h2 { font-weight: 800; font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: 1.2rem; text-shadow: 0 4px 16px rgba(0,0,0,0.4); color: #fff; }
+        .carousel-caption p { font-size: clamp(1.1rem, 2vw, 1.4rem); max-width: 650px; text-shadow: 0 2px 10px rgba(0,0,0,0.4); color: rgba(255,255,255,.9); line-height: 1.6; }
+        .carousel-indicators { margin-bottom: 2.5rem; z-index: 11; justify-content: flex-start; margin-left: 8%; }
+        .carousel-indicators [data-bs-target] { width: 45px; height: 6px; border-radius: 4px; background-color: #fff; opacity: 0.35; border: none; margin: 0 5px; transition: opacity 0.3s, background-color 0.3s; }
+        .carousel-indicators .active { opacity: 1; background-color: #0d6efd; }
     </style>
 </head>
 <body>
@@ -68,6 +79,67 @@ $primaryIcon = $isLoggedIn ? 'fa-solid fa-gauge-high' : 'fa-solid fa-right-to-br
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section class="department-carousel">
+    <div id="hospitalShowcaseCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000" data-bs-pause="false">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Reception"></button>
+            <button type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide-to="1" aria-label="Doctor"></button>
+            <button type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide-to="2" aria-label="Pharmacy"></button>
+            <button type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide-to="3" aria-label="Laboratory"></button>
+        </div>
+        <div class="carousel-inner">
+            <!-- Reception -->
+            <div class="carousel-item active">
+                <img src="<?= BASE_URL ?>/assets/img/reception.jpg" class="carousel-image" alt="Hospital Reception">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <span class="badge bg-primary mb-3 px-3 py-2 rounded-pill fs-6">Front Desk</span>
+                    <h2>Welcome to Care</h2>
+                    <p>Experience a warm welcome and seamless registration. Our modern reception environment ensures your healthcare journey begins smoothly and efficiently.</p>
+                </div>
+            </div>
+            <!-- Doctor -->
+            <div class="carousel-item">
+                <img src="<?= BASE_URL ?>/assets/img/doctor.jpg" class="carousel-image" alt="Doctor Consultation">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <span class="badge bg-success mb-3 px-3 py-2 rounded-pill fs-6">Medical Experts</span>
+                    <h2>Professional Consultations</h2>
+                    <p>Consult with our top specialists in a comforting examination room. We provide expert diagnosis and personalized treatment plans for every patient.</p>
+                </div>
+            </div>
+            <!-- Pharmacy -->
+            <div class="carousel-item">
+                <img src="<?= BASE_URL ?>/assets/img/pharmacy.jpg" class="carousel-image" alt="Hospital Pharmacy">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill fs-6">Integrated Pharmacy</span>
+                    <h2>In-House Dispensary</h2>
+                    <p>Access your prescribed medications instantly. Our fully-stocked modern pharmacy is integrated directly with your doctor's electronic treatment plan.</p>
+                </div>
+            </div>
+            <!-- Lab -->
+            <div class="carousel-item">
+                <img src="<?= BASE_URL ?>/assets/img/lab.jpg" class="carousel-image" alt="Medical Laboratory">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <span class="badge bg-info text-dark mb-3 px-3 py-2 rounded-pill fs-6">Diagnostic Center</span>
+                    <h2>Advanced Diagnostics</h2>
+                    <p>Our state-of-the-art laboratory facilities offer comprehensive blood testing and analysis, providing fast, accurate results to accelerate your care.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide="prev" style="z-index: 11; width: 6%;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hospitalShowcaseCarousel" data-bs-slide="next" style="z-index: 11; width: 6%;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </section>
 
