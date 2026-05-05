@@ -70,9 +70,7 @@ $links = [
                 </div>
                 <span class="sidebar-brand-meta small text-muted d-block mt-2 mb-0">Medical SaaS Dashboard</span>
             </div>
-            <button type="button" class="btn btn-sm sidebar-collapse-btn d-none" id="sidebarCollapseToggle" aria-expanded="true" aria-label="Collapse sidebar">
-                <i class="fa-solid fa-angles-left sidebar-collapse-icon" aria-hidden="true"></i>
-            </button>
+
         </div>
         <nav class="sidebar-nav-scroll nav nav-pills flex-column gap-1 px-3 flex-grow-1" aria-label="Main navigation">
             <?php foreach ($links[$role] ?? [] as [$label, $path, $icon]): ?>

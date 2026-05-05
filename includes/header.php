@@ -24,10 +24,15 @@ $flashMessages = get_flash();
     <main class="main-content flex-grow-1">
         <header class="topbar app-topbar card border-0 shadow-sm mb-4">
             <div class="card-body py-2 px-3 d-flex flex-wrap align-items-center gap-3 justify-content-between">
-                <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-primary d-lg-none mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-controls="appSidebar">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-outline-primary d-lg-none mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-controls="appSidebar">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <button class="btn btn-light d-none d-lg-flex align-items-center justify-content-center sidebar-collapse-btn" style="width: 38px; height: 38px; padding: 0;" type="button" id="sidebarCollapseToggle" aria-expanded="true" aria-label="Collapse sidebar">
+                            <i class="fa-solid fa-bars sidebar-collapse-icon" aria-hidden="true"></i>
+                        </button>
+                    </div>
                     <h1 class="h5 mb-0 fw-semibold"><?= e($pageTitle) ?></h1>
                 </div>
                 <div class="d-flex align-items-center gap-2 flex-grow-1 justify-content-end">

@@ -531,10 +531,20 @@ table thead th, table tr:first-child th {
     background: #fff;
     border: 1px solid #eef2f8;
 }
+[data-bs-theme='dark'] .table-shell,
+body[data-bs-theme='dark'] .table-shell {
+    background: #1e293b;
+    border-color: #334155;
+}
 .table-toolbar {
     background: #fff;
     padding: .85rem;
     border-bottom: 1px solid #e9ecef;
+}
+[data-bs-theme='dark'] .table-toolbar,
+body[data-bs-theme='dark'] .table-toolbar {
+    background: #1e293b;
+    border-color: #334155;
 }
 .form-grid {
     background: #fff;
@@ -546,6 +556,12 @@ table thead th, table tr:first-child th {
     gap: .75rem;
     border: 1px solid #eef2f8;
 }
+[data-bs-theme='dark'] .form-grid,
+body[data-bs-theme='dark'] .form-grid {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
+}
 .form-grid input,
 .form-grid select,
 .form-grid textarea {
@@ -556,6 +572,12 @@ table thead th, table tr:first-child th {
     border-radius: 14px;
     padding: 1rem;
     box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
+}
+[data-bs-theme='dark'] .invoice,
+body[data-bs-theme='dark'] .invoice {
+    background: #1e293b;
+    color: #e2e8f0;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
 }
 .footer {
     color: #64748b;
