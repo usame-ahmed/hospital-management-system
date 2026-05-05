@@ -11,16 +11,25 @@ if ($appTitleInitials === '') {
 }
 $links = [
     'admin' => [
+        ['type' => 'header', 'label' => 'Admin Core'],
         ['Dashboard', '/admin/dashboard.php', 'fa-solid fa-house'],
         ['Users', '/admin/users.php', 'fa-solid fa-users-gear'],
+        ['Settings', '/admin/create.php', 'fa-solid fa-cog'],
+        
+        ['type' => 'header', 'label' => 'Reception'],
         ['Patients', '/receptionist/view.php', 'fa-solid fa-user-injured'],
-        ['Doctors', '/admin/doctors.php', 'fa-solid fa-user-doctor'],
-        ['Nurses', '/admin/nurses.php', 'fa-solid fa-user-nurse'],
-        ['Lab', '/lab/view.php', 'fa-solid fa-flask'],
-        ['Pharmacy', '/pharmacy/view.php', 'fa-solid fa-pills'],
         ['Rooms', '/admissions/view.php', 'fa-solid fa-bed'],
         ['Bills', '/billing/view.php', 'fa-solid fa-file-invoice-dollar'],
-        ['Settings', '/admin/create.php', 'fa-solid fa-cog'],
+        
+        ['type' => 'header', 'label' => 'Medical'],
+        ['Doctors', '/admin/doctors.php', 'fa-solid fa-user-doctor'],
+        ['Nurses', '/admin/nurses.php', 'fa-solid fa-user-nurse'],
+        
+        ['type' => 'header', 'label' => 'Laboratory'],
+        ['Lab Tests', '/lab/view.php', 'fa-solid fa-flask'],
+        
+        ['type' => 'header', 'label' => 'Pharmacy'],
+        ['Inventory', '/pharmacy/view.php', 'fa-solid fa-pills'],
     ],
     'receptionist' => [
         ['Dashboard', '/receptionist/dashboard.php', 'fa-solid fa-house'],
@@ -60,27 +69,31 @@ $links = [
         <button type="button" class="btn-close position-absolute top-50 end-0 translate-middle-y me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column p-0 sidebar-body">
-        <div class="sidebar-brand d-none d-lg-flex flex-column align-items-center text-center px-3 pt-4 pb-3 gap-3" aria-label="<?= e(APP_NAME) ?>">
+        <div class="sidebar-brand d-none d-lg-flex flex-row align-items-center px-3 pt-3 pb-3 gap-3" aria-label="<?= e(APP_NAME) ?>">
             <span class="brand-icon brand-icon-wordmark" aria-hidden="true"><i class="fa-solid fa-hospital"></i></span>
-            <div class="sidebar-brand-text w-100">
-                <div class="sidebar-brand-wordmark">
-                    <?php foreach ($appTitleWords as $word): ?>
-                        <span class="sidebar-brand-line"><?= e($word) ?></span>
-                    <?php endforeach; ?>
+            <div class="sidebar-brand-text text-start">
+                <div class="sidebar-brand-wordmark fw-bold fs-6 lh-sm text-truncate">
+                    <?= e(APP_NAME) ?>
                 </div>
-                <span class="sidebar-brand-meta small text-muted d-block mt-2 mb-0">Medical SaaS Dashboard</span>
+                <span class="sidebar-brand-meta small text-muted d-block mt-1 mb-0" style="font-size: 0.72rem;">Medical Dashboard</span>
             </div>
-
         </div>
         <nav class="sidebar-nav-scroll nav nav-pills flex-column gap-1 px-3 flex-grow-1" aria-label="Main navigation">
-            <?php foreach ($links[$role] ?? [] as [$label, $path, $icon]): ?>
-                <?php $isActive = str_contains($currentPath, $path); ?>
-                <a class="nav-link sidebar-nav-link d-flex flex-nowrap align-items-center gap-3 <?= $isActive ? 'active' : '' ?>"
-                   href="<?= BASE_URL . $path ?>"
-                   title="<?= e($label) ?>">
-                    <span class="nav-icon flex-shrink-0" aria-hidden="true"><i class="<?= e($icon) ?>"></i></span>
-                    <span class="sidebar-link-text flex-grow-1 min-w-0 text-truncate"><?= e($label) ?></span>
-                </a>
+            <?php foreach ($links[$role] ?? [] as $item): ?>
+                <?php if (isset($item['type']) && $item['type'] === 'header'): ?>
+                    <div class="sidebar-heading text-uppercase mt-3 mb-1 px-2" style="font-size: 0.72rem; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em;">
+                        <?= e($item['label']) ?>
+                    </div>
+                <?php else: ?>
+                    <?php [$label, $path, $icon] = $item; ?>
+                    <?php $isActive = str_contains($currentPath, $path); ?>
+                    <a class="nav-link sidebar-nav-link d-flex flex-nowrap align-items-center gap-3 <?= $isActive ? 'active' : '' ?>"
+                       href="<?= BASE_URL . $path ?>"
+                       title="<?= e($label) ?>">
+                        <span class="nav-icon flex-shrink-0" aria-hidden="true"><i class="<?= e($icon) ?>"></i></span>
+                        <span class="sidebar-link-text flex-grow-1 min-w-0 text-truncate"><?= e($label) ?></span>
+                    </a>
+                <?php endif; ?>
             <?php endforeach; ?>
         </nav>
 
