@@ -44,14 +44,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 50%, rgba(19, 192, 182, 0.85) 100%),
-                        url('../assets/img/hospital-bg.jpg') center/cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0;
             padding: 1rem;
+            background-color: #f8fafc;
+        }
+        .bg-slideshow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background-color: #1e3c72;
+        }
+        .bg-slideshow div {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeSlide 24s infinite;
+        }
+        .bg-slideshow div:nth-child(1) { background-image: url('../assets/img/reception.jpg'); animation-delay: 0s; }
+        .bg-slideshow div:nth-child(2) { background-image: url('../assets/img/doctor.jpg'); animation-delay: 6s; }
+        .bg-slideshow div:nth-child(3) { background-image: url('../assets/img/pharmacy.jpg'); animation-delay: 12s; }
+        .bg-slideshow div:nth-child(4) { background-image: url('../assets/img/lab.jpg'); animation-delay: 18s; }
+        @keyframes fadeSlide {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            25% { opacity: 1; }
+            35% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 50%, rgba(19, 192, 182, 0.85) 100%);
         }
         .login-card {
             background: #ffffff;
@@ -170,6 +200,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+
+<div class="bg-slideshow">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="bg-overlay"></div>
 
 <div class="login-card">
     <div class="medical-icon-wrapper">
