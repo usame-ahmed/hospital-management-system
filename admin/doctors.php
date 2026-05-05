@@ -7,6 +7,7 @@ $pageTitle = 'Doctors';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['create_doctor'])) {
         try {
+            $pdo->beginTransaction();
             $insert = $pdo->prepare(
                 "INSERT INTO users (username, password_hash, role, full_name, is_active)
                  VALUES (?, ?, 'doctor', ?, ?)"
@@ -17,8 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 trim($_POST['full_name'] ?? ''),
                 isset($_POST['is_active']) ? 1 : 0,
             ]);
+            $userId = $pdo->lastInsertId();
+            
+            $specialization = $_POST['specialization'] ?? 'General Doctor';
+            $insertDoc = $pdo->prepare("INSERT INTO doctors (user_id, specialization) VALUES (?, ?)");
+            $insertDoc->execute([$userId, $specialization]);
+            
+            $pdo->commit();
             flash('success', 'Doctor created successfully.');
         } catch (Throwable $exception) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             flash('danger', 'Failed to create doctor. Username may already exist.');
         }
     }
@@ -62,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('/admin/doctors.php');
 }
 
-$activeDoctors = $pdo->query("SELECT id, full_name, username, is_active, created_at FROM users WHERE role='doctor' AND is_active=1 ORDER BY id DESC")->fetchAll();
-$deactivatedDoctors = $pdo->query("SELECT id, full_name, username, is_active, created_at FROM users WHERE role='doctor' AND is_active=0 ORDER BY id DESC")->fetchAll();
+$activeDoctors = $pdo->query("SELECT u.id, u.full_name, u.username, u.is_active, u.created_at, d.specialization FROM users u LEFT JOIN doctors d ON u.id=d.user_id WHERE u.role='doctor' AND u.is_active=1 ORDER BY u.id DESC")->fetchAll();
+$deactivatedDoctors = $pdo->query("SELECT u.id, u.full_name, u.username, u.is_active, u.created_at, d.specialization FROM users u LEFT JOIN doctors d ON u.id=d.user_id WHERE u.role='doctor' AND u.is_active=0 ORDER BY u.id DESC")->fetchAll();
 include __DIR__ . '/../includes/header.php';
 ?>
 <div class="d-flex justify-content-end mb-3">
@@ -74,10 +85,11 @@ include __DIR__ . '/../includes/header.php';
 
 <h5 class="mb-2">Active Doctors</h5>
 <table>
-    <tr><th>Name</th><th>Username</th><th>Status</th><th>Created</th><th>Action</th></tr>
+    <tr><th>Name</th><th>Department</th><th>Username</th><th>Status</th><th>Created</th><th>Action</th></tr>
     <?php foreach ($activeDoctors as $row): ?>
         <tr>
             <td><?= e($row['full_name']) ?></td>
+            <td><span class="badge bg-light text-dark border"><i class="fa-solid fa-stethoscope me-1 text-primary"></i><?= e($row['specialization'] ?? 'General Doctor') ?></span></td>
             <td><?= e($row['username']) ?></td>
             <td><span class="status-badge status-active">Active</span></td>
             <td><?= e($row['created_at']) ?></td>
@@ -106,10 +118,11 @@ include __DIR__ . '/../includes/header.php';
 
 <h5 class="mb-2 mt-4">Deactivated Doctors</h5>
 <table>
-    <tr><th>Name</th><th>Username</th><th>Status</th><th>Created</th><th>Action</th></tr>
+    <tr><th>Name</th><th>Department</th><th>Username</th><th>Status</th><th>Created</th><th>Action</th></tr>
     <?php foreach ($deactivatedDoctors as $row): ?>
         <tr>
             <td><?= e($row['full_name']) ?></td>
+            <td><span class="badge bg-light text-dark border"><i class="fa-solid fa-stethoscope me-1 text-primary"></i><?= e($row['specialization'] ?? 'General Doctor') ?></span></td>
             <td><?= e($row['username']) ?></td>
             <td><span class="status-badge status-inactive">Deactivated</span></td>
             <td><?= e($row['created_at']) ?></td>
@@ -146,6 +159,17 @@ include __DIR__ . '/../includes/header.php';
                     <div class="mb-2">
                         <label class="form-label">Full Name</label>
                         <input class="form-control" name="full_name" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Department / Specialization</label>
+                        <select class="form-select" name="specialization" required>
+                            <option value="" disabled selected>Select Department...</option>
+                            <option value="Surgeon Doctor">Surgeon Doctor</option>
+                            <option value="Pediatric Doctor (Children's Doctor)">Pediatric Doctor (Children's Doctor)</option>
+                            <option value="Orthopedic Doctor (Bone Doctor)">Orthopedic Doctor (Bone Doctor)</option>
+                            <option value="Dermatologist (Skin Doctor)">Dermatologist (Skin Doctor)</option>
+                            <option value="General Doctor">General Doctor</option>
+                        </select>
                     </div>
                     <div class="mb-2">
                         <label class="form-label">Username</label>
